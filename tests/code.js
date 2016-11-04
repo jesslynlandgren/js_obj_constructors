@@ -17,25 +17,33 @@ Card.prototype.getImageUrl = function() {
   return 'images/' + name + '_of_' + this.suit + '.png';
 };
 
+Card.prototype.printCard = function(){
+    var stringCard = this.point + ' of ' + this.suit;
+    return stringCard;
+};
+
 function Hand() {
     this.cards = [];
     this.points = 0;
 }
 
-Hand.prototype.addCard = function(Card) {
-    this.cards.push(Card);
+Hand.prototype.addCard = function(card_obj) {
+    if (card_obj instanceof Card){
+        this.cards.push(card_obj);
+        return 'Added card';
+    } else {
+        return "Invalid card";
+    }
 };
 
-Hand.prototype.addCard = function(Card) {
-    this.cards.push(Card);
-};
-
-Hand.prototype.getPoints = function(Card) {
+Hand.prototype.getPoints = function() {
+    this.points = 0;
     for (var idxCard in this.cards){
         this.points += this.cards[idxCard].point;
     }
     return this.points;
 };
+
 
 function Deck() {
     this.cards = [];
@@ -60,7 +68,6 @@ Deck.prototype.draw = function() {
     return card1;
 };
 
-
 Deck.prototype.shuffle = function() {
     var shuffled = [];
     var deckLength = this.cards.length;
@@ -76,33 +83,33 @@ Deck.prototype.shuffle = function() {
 Deck.prototype.numCardsLeft = function() {
     return this.cards.length;
 };
-
-var myCard = new Card(5, 'diamonds');
-console.log(myCard.point);
-console.log(myCard.suit);
-console.log(myCard.getImageUrl());
-
-var myHand = new Hand();
-myHand.addCard(new Card(5, 'diamonds'));
-console.log(myHand);
-
-myHand.addCard(new Card(13, 'spades'));
-console.log(myHand);
-
-console.log(myHand.getPoints());
-
-
-var myDeck = new Deck();
-console.log(myDeck.numCardsLeft());
-
-console.log(myDeck.draw());
-console.log(myDeck.numCardsLeft());
-
-console.log(myDeck.draw());
-console.log(myDeck.numCardsLeft());
-
-// console.log(myDeck);
-myDeck.shuffle();
-// console.log(myDeck);
-
-console.log(myDeck.numCardsLeft());
+//
+// var myCard = new Card(5, 'diamonds');
+// console.log(myCard.point);
+// console.log(myCard.suit);
+// console.log(myCard.getImageUrl());
+//
+// var myHand = new Hand();
+// myHand.addCard(new Card(5, 'diamonds'));
+// console.log(myHand);
+//
+// myHand.addCard(new Card(13, 'spades'));
+// console.log(myHand);
+//
+// console.log(myHand.getPoints());
+//
+//
+// var myDeck = new Deck();
+// console.log(myDeck.numCardsLeft());
+//
+// console.log(myDeck.draw());
+// console.log(myDeck.numCardsLeft());
+//
+// console.log(myDeck.draw());
+// console.log(myDeck.numCardsLeft());
+//
+// // console.log(myDeck);
+// myDeck.shuffle();
+// // console.log(myDeck);
+//
+// console.log(myDeck.numCardsLeft());
